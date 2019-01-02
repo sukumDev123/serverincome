@@ -4,9 +4,21 @@ export class IncomePresent {
   constructor(db) {
     this.db = db
   }
+  async saveToNewData({ email_user, data }) {
+    try {
+      return this.db
+        .collection("incomes")
+        .doc(email_user)
+        .set({
+          data: data
+        })
+    } catch (error) {
+      return error
+    }
+  }
   async saveToData({ email_user, type, detail, price }) {
     try {
-      const create_at = +new Date()
+      const create_at = Number(new Date())
       const incomeOld = await this.db
         .collection("incomes")
         .doc(email_user)
@@ -45,7 +57,8 @@ export class IncomePresent {
           })
       }
     } catch (error) {
-      console.log({ error })
+      // console.log({ error })
+      return error
     }
   }
   async findUserByEmail({ email_user }) {

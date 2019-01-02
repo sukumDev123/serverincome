@@ -8,7 +8,8 @@ export const paramIncomeEmail = async (req, res, next, id) => {
       email_user: id
     })
     req.income = incomeData
-    console.log(req.income)
+    req.email_user = id
+
     next()
   } catch (error) {
     next({ message: error, status: 500 })
@@ -24,6 +25,23 @@ export const saveIncomesList = async (req, res, next) => {
     await new IncomePresent(req.db_f).saveToData(newIncome)
     res.status(200).json(new MsgHanler("Add new Income , sucess.", 200, []))
   } catch (error) {
+    next({ message: error, status: 500 })
+  }
+}
+export const deleteDataInArray = async (req, res, next) => {
+  try {
+    // console.time()
+    let myOldData = req.income.data.data
+    const { delete_index } = req.query
+    myOldData.splice(delete_index, 1)
+    const newData = {
+      email_user: req.email_user,
+      data: myOldData
+    }
+    await new IncomePresent(req.db_f).saveToNewData(newData)
+    res.json(myOldData)
+  } catch (error) {
+    console.log(error)
     next({ message: error, status: 500 })
   }
 }
