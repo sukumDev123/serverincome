@@ -2,3 +2,4 @@ node_modules/
 config/
 *.log
 yarn.lock
+dist/
