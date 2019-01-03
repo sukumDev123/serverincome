@@ -25,7 +25,7 @@ export class UserPresent {
       email: email,
       password: this.cryptoPassword(password),
       role: 0,
-      create_at: +new Date()
+      create_at: Number(new Date())
     })
     return addOnDb
   }
