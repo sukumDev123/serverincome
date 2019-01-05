@@ -13,7 +13,7 @@ export class IncomePresent {
           data: data
         })
     } catch (error) {
-      return error
+      return Promise.reject(error)
     }
   }
   async saveToData({ email_user, type, detail, price }) {
@@ -58,7 +58,7 @@ export class IncomePresent {
       }
     } catch (error) {
       // console.log({ error })
-      return error
+      return Promise.reject(error)
     }
   }
   async findUserByEmail({ email_user }) {

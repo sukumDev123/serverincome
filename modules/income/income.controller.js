@@ -22,6 +22,7 @@ export const saveIncomesList = async (req, res, next) => {
   try {
     const { email, type, detail, price } = req.body
     const newIncome = new IncomeModel(email, type, detail, price)
+    console.log(newIncome)
     await new IncomePresent(req.db_f).saveToData(newIncome)
     res.status(200).json(new MsgHanler("Add new Income , sucess.", 200, []))
   } catch (error) {
